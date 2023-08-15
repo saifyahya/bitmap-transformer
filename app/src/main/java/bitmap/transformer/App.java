@@ -4,25 +4,22 @@
 package bitmap.transformer;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class App {
     public static void main(String[] args) {
 
-        /*String inputFile = args[0];
-        String outputFile = args[1];
-        String transformName = args[2];*/
-        try {
-            File inputImage = new File("C:\\Users\\Saify\\OneDrive\\Desktop\\bmp.bmp");
-            BufferedImage img= ImageIO.read(inputImage);
-            Bitmap bitmap = new Bitmap(img.getWidth(),img.getHeight());
-            //bitmap.Transform(transformName);
-           // bitmap.writeToFile(outputFile);
-            System.out.println("Transform applied and saved successfully.");
-            System.out.println(img.getHeight()+":"+img.getWidth());
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+        String inputFile = "C:\\Users\\Saify\\OneDrive\\Desktop\\bmp.bmp";
+        String outputFile = "C:\\Users\\Saify\\OneDrive\\Desktop\\bmpEdited.bmp";
+        //String inputFile=args[0];
+        //String outputFile=args[1];
+        //String transformName= args[2];
+        Bitmap bitmap = new Bitmap(inputFile);
+        bitmap.convertToBlackAndWhite();
+        bitmap.writeToFile(outputFile);
+
+
     }
 }
