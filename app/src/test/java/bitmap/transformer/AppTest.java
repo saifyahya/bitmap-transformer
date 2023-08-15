@@ -4,11 +4,49 @@
 package bitmap.transformer;
 
 import org.junit.jupiter.api.Test;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test public void testConvertToBlackAndWhite() {
+        try {
+            Bitmap bitmap = new Bitmap("./src/main/resources/bmp.bmp");
+            BufferedImage img = ImageIO.read(new File("./src/test/resources/testBlackWhite.bmp")); // read expected image
+            byte[] expectedPixelData = ((DataBufferByte) img.getRaster().getDataBuffer()).getData(); //get the tested image pixels data
+            bitmap.convertToBlackAndWhite();
+            assertArrayEquals(expectedPixelData, bitmap.getPixelData());  // compare the pixels data
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
+    @Test public void testAddBorder() {
+        try {
+            Bitmap bitmap = new Bitmap("./src/main/resources/bmp.bmp");
+            BufferedImage img = ImageIO.read(new File("./src/test/resources/testAddBorder.bmp")); // read expected image
+            byte[] expectedPixelData = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
+            bitmap.addBorder(5); // test with border width=5
+            assertArrayEquals(expectedPixelData, bitmap.getPixelData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test public void testVerticallyMirror() {
+        try {
+            Bitmap bitmap = new Bitmap("./src/main/resources/bmp.bmp");
+            BufferedImage img = ImageIO.read(new File("./src/test/resources/testVerticallyMirror.bmp")); // read expected image
+            byte[] expectedPixelData = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
+            bitmap.verticallyMirror(); // test with border width=5
+            assertArrayEquals(expectedPixelData, bitmap.getPixelData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
+

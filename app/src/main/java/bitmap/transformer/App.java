@@ -11,13 +11,11 @@ import java.io.File;
 public class App {
     public static void main(String[] args) {
 
-        String inputFile = "C:\\Users\\Saify\\OneDrive\\Desktop\\bmp.bmp";
-        String outputFile = "C:\\Users\\Saify\\OneDrive\\Desktop\\bmpEdited.bmp";
-        //String inputFile=args[0];
-        //String outputFile=args[1];
-        //String transformName= args[2];
+        String inputFile=args[0];  // user should provide this for input path "./app/src/main/resources/bmp.bmp"
+        String outputFile=args[1];  // user should provide this for output path "./app/src/main/resources/newBmp.bmp"
+        int transformMethod= Integer.parseInt(args[2]);  // user should provide a number of numbers (1, 2, 3) to navigate to one of the methods defined in the Bitmap class. ex:(3:verticallyMirror, 2:convertToBlackAndWhite, 1:addBorder)
         Bitmap bitmap = new Bitmap(inputFile);
-        bitmap.convertToBlackAndWhite();
+        bitmap.methodName(transformMethod);
         bitmap.writeToFile(outputFile);
 
 
